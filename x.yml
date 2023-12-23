@@ -1,0 +1,21 @@
+version: '3'
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: quay.io/debezium/zookeeper:2.4
+    ports:
+      - 3888:3888
+      - 2181:2181
+
+  kafka:
+    image: quay.io/debezium/kafka:2.4
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    links:
+      - zookeeper:zookeeper
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+
