@@ -5,7 +5,8 @@ import time
 bootstrap_servers = 'localhost:9092'
 
 # Kafka topic to produce messages to
-topic = 'your_topic'
+# topic = 'your_topic'
+topic = 'something'
 
 # Create a Kafka producer configuration
 conf = {'bootstrap.servers': bootstrap_servers}

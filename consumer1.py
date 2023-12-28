@@ -1,10 +1,16 @@
 from confluent_kafka import Consumer, KafkaError
+from confluent_kafka.admin import AdminClient
+import time
+import json
+
+
 
 # Kafka bootstrap servers
 bootstrap_servers = 'localhost:9092'
 
 # Kafka topic to consume messages from
-topic = 'your_topic'
+# topic = 'your_topic'
+topic = 'mytopic.prefix.public.transaction'
 
 # Create a Kafka consumer configuration
 conf = {
@@ -35,7 +41,12 @@ try:
                 print("Error: {}".format(msg.error()))
         else:
             # Print the received message key and value
-            print('Received message: key={}, value={}'.format(msg.key(), msg.value()))
+            # print('Received message: key={}, value={}'.format(msg.key(), msg.value()))
+            
+            # convert bytes to json
+            print(msg.value())
+            # print(msg.key())
+            time.sleep(2)
 
 except KeyboardInterrupt:
     pass

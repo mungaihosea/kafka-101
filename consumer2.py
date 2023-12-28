@@ -1,4 +1,5 @@
 from confluent_kafka import Consumer, KafkaError
+import time
 
 # Kafka bootstrap servers
 bootstrap_servers = 'localhost:9092'
@@ -9,7 +10,7 @@ topic = 'your_topic'
 # Create a Kafka consumer configuration
 conf = {
     'bootstrap.servers': bootstrap_servers,
-    'group.id': 'my_consumer_group2',  # Choose a unique consumer group ID
+    'group.id': 'my_consumer_group1',  # Choose a unique consumer group ID
     'auto.offset.reset': 'earliest',  # Start consuming from the beginning of the topic if no offset is stored
 }
 
@@ -36,6 +37,7 @@ try:
         else:
             # Print the received message key and value
             print('Received message: key={}, value={}'.format(msg.key(), msg.value()))
+            time.sleep(3)
 
 except KeyboardInterrupt:
     pass
