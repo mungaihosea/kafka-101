@@ -10,7 +10,7 @@ bootstrap_servers = 'localhost:9092'
 
 # Kafka topic to consume messages from
 # topic = 'your_topic'
-topic = 'mytopic.prefix.public.transaction'
+topic = 'mpesa_express_public_transaction'
 
 # Create a Kafka consumer configuration
 conf = {
@@ -43,9 +43,14 @@ try:
             # Print the received message key and value
             # print('Received message: key={}, value={}'.format(msg.key(), msg.value()))
             
-            # convert bytes to json
-            print(msg.value())
-            # print(msg.key())
+            decoded_value = msg.value().decode('utf-8')
+            # Convert the decoded string to a Python dictionary using json.loads()
+            value_dict = json.loads(decoded_value)
+
+            # Convert the Python dictionary back to a JSON-formatted string using json.dumps()
+            json_string = json.dumps(value_dict, indent=2)  # Optional: indent for pretty formatting
+            print(json_string)
+
             time.sleep(2)
 
 except KeyboardInterrupt:
